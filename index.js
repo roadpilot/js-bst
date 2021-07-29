@@ -33,50 +33,30 @@ function BinarySearchTree() {
     
     // Start of function levelOrder
     this.levelOrder = function(root) {
-var q = [];
-var dataArr = [];
         if (root == undefined) {
+        // console.log(queue)
            return -1;
         }
-        // console.log("FOO", root.data)
         this.levelOrder(root.left)
         this.levelOrder(root.right)
-console.log(dataArr.join(" "));
         // Add your code here
-q.push(root);
-while(q.length > 0){
-    var getdata = q.shift();
-    dataArr.push(getdata.data)
-    if(getdata.left){
-        q.push(getdata.left)
-    }
-    if(getdata.right){
-        q.push(getdata.right);
-    }
-
-}
+   var queue = [root];
+        console.log(queue)
+      while (queue.length > 0) {
+        var node = queue.shift();
+        // write(node.data + " ");
+        if(node.left) {
+         queue.push(node.left);
+        // process.stdout.write(node.data + " ")
+        }
+        if (node.right) {
+         queue.push(node.right);
+        // process.stdout.write(node.data + " ")
+        }
+      }
+      
+    //   function write(str){
+    //     process.stdout.write(str);
+    //   }        
         // To print values separated by spaces use process.stdout.write(someValue + ' ')
 	}; // End of function levelOrder
-}; // End of function BinarySearchTree
-
-process.stdin.resume();
-process.stdin.setEncoding('ascii');
-
-var _input = "";
-
-process.stdin.on('data', function (data) {
-    _input += data;
-});
-
-process.stdin.on('end', function () {
-    var tree = new BinarySearchTree();
-    var root = null;
-    
-    var values = _input.split('\n').map(Number);
-    
-    for (var i = 1; i < values.length; i++) {
-        root = tree.insert(root, values[i]);
-    }
-    
-    tree.levelOrder(root);
-});
